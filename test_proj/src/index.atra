@@ -1,0 +1,15 @@
+text("<!DOCTYPE HTML>");
+
+html(lang="en"){
+    head(){
+        title(){
+            text("test webpage");
+        }
+        meta(charset="utf-8");
+    }
+    body(){
+        h1(){
+            text("TEST webpage");
+        }
+    }
+}
