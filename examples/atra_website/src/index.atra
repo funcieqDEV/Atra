@@ -1,33 +1,110 @@
 text("<!DOCTYPE html>");
-html(lang="en"){
-    head(){
+html(lang="en") {
+    head() {
         meta(charset="utf-8");
         meta(name="viewport", content="width=device-width, initial-scale=1.0");
-        title(){
-            text("Welcome to Atra first ever website!");
+        title() {
+            text("Atra Programming Language");
         }
         link(rel="stylesheet", href="styles.css");
     }
-    body(){
-        header(id="banner"){
-            h1(){
-                text("Welcome to Atra!");
+    body() {
+
+        div(class="container") {
+            h1() {
+                text("Atra Programming Language");
             }
             p(){
-                text("This is the first ever website built with Atra.");
+                text("the page made by ai does not reflect real information");
             }
-            p(){
-                text("Atra is a new templating language that makes it easy to create HTML documents.");
+            div(class="badges") {
+                img(src="https://img.shields.io/badge/version-beta--0.0.1-blue.svg", alt="Version");
+                img(src="https://img.shields.io/badge/status-stable-green.svg", alt="Status");
+                img(src="https://img.shields.io/badge/license-MIT-blue.svg", alt="License");
             }
-            p(){
-                text("This is a simple example of how to use Atra to create a website.");
+            p() {
+                text("A modern, intuitive programming language designed for rapid HTML generation");
             }
-            p(){
-                text("You can learn more about Atra at ");
-                a(href="https://github.com/funcieqDEV/Atra/tree/main/", target="_blank"){
-                    text("GitHub");
-                }
+            p() {
+                text("Atra revolutionizes web development by providing a clean, readable syntax that compiles directly to HTML. Write less, build faster, and maintain cleaner codebases with reusable components and intuitive structure.");
+            }
+
+            h2() { text("✨ Key Features"); }
+            ul() {
+                li() { text("🚀 Fast Development - Intuitive syntax that mirrors HTML structure"); }
+                li() { text("🧩 Component Reusability - Define once, use everywhere with variable components"); }
+                li() { text("⚡ Lightning Compilation - Instant compilation to clean, standards-compliant HTML"); }
+                li() { text("🛠️ Developer Friendly - Clear error messages and excellent debugging support"); }
+                li() { text("🌍 Cross Platform - Works seamlessly on Windows, macOS, and Linux"); }
+                li() { text("🔧 Extensible - Plugin system for custom functionality"); }
+            }
+
+            h2() { text("Your First Atra Program"); }
+            p() { text("Create a file named hello.atra and write your first program using Atra's syntax."); }
+            p() { text("Compile it using the Atra CLI to generate the corresponding HTML file."); }
+            p() { text("This simple workflow allows rapid development of clean HTML documents."); }
+
+            h2() { text("📖 Syntax Guide"); }
+            p() { text("Atra's syntax closely mirrors HTML structure, supporting elements, attributes, text content, and nesting."); }
+            p() { text("It also supports reusable components for modular and maintainable code."); }
+
+            h2() { text("🏗️ Advanced Examples"); }
+            p() { text("Atra supports building complete web pages, including headers, navigation, main content, and footers."); }
+            p() { text("Reusable components enable scalable and consistent UI design."); }
+
+            h2() { text("🛠️ CLI Commands"); }
+            p() { text("Use the Atra CLI for compiling, watching, formatting, and checking your Atra source files."); }
+
+            h2() { text("📚 Documentation"); }
+            ul() {
+                li() { a(href="https://atra-lang.dev/docs/reference") { text("Language Reference"); } }
+                li() { a(href="https://atra-lang.dev/docs/components") { text("Component System"); } }
+                li() { a(href="https://atra-lang.dev/docs/cli") { text("CLI Guide"); } }
+                li() { a(href="https://atra-lang.dev/examples") { text("Examples"); } }
+            }
+
+            h2() { text("🤝 Contributing"); }
+            p() {
+                text("We welcome contributions! Please see our ");
+                a(href="CONTRIBUTING.md") { text("Contributing Guide"); }
+                text(" for details.");
+            }
+            p() {
+                text("Development setup involves cloning the repository, installing dependencies, running tests, and building the project.");
+            }
+
+            h2() { text("🐛 Issues & Support"); }
+            ul() {
+                li() { a(href="https://github.com/atra-lang/atra/issues") { text("Report a Bug"); } }
+                li() { a(href="https://github.com/atra-lang/atra/issues") { text("Request a Feature"); } }
+                li() { a(href="https://discord.gg/atra-lang") { text("Join our Discord"); } }
+            }
+
+            h2() { text("📝 License"); }
+            p() {
+                text("This project is licensed under the MIT License – see the ");
+                a(href="LICENSE") { text("LICENSE"); }
+                text(" file for details.");
+            }
+
+            h2() { text("🙏 Acknowledgments"); }
+            ul() {
+                li() { text("Thanks to all contributors who have helped shape Atra"); }
+                li() { text("Inspired by modern templating languages and the need for simpler HTML generation"); }
+                li() { text("Special thanks to the open source community"); }
+            }
+
+            p() { text("Made with ❤️ by the Atra community"); }
+
+            p() {
+                a(href="https://github.com/atra-lang/atra") { text("GitHub"); }
+                text(" • ");
+                a(href="https://atra-lang.dev") { text("Website"); }
+                text(" • ");
+                a(href="https://twitter.com/atra_lang") { text("Twitter"); }
+                text(" • ");
+                a(href="https://discord.gg/atra-lang") { text("Discord"); }
+            }
         }
     }
-}
 }
