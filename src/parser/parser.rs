@@ -35,9 +35,7 @@ impl Parser {
             Some(token) => match token.token {
                 Token::Ident => self.parse_tag().map(Some),
                 Token::Eof => {
-                   
-
-                    self.advance(); 
+                    self.advance();
                     Ok(None)
                 }
                 _ => Err(format!(
@@ -56,11 +54,10 @@ impl Parser {
             children: vec![],
         };
 
-        if let Some(token) = self.peek() {
+        if let Some(_token) = self.peek() {
             let name = self.consume(Token::Ident, "Expected tag name")?;
             node.name = name.slice.clone();
 
-      
             if node.name == "text" {
                 self.consume(Token::LParen, "Expected '(' after 'text'")?;
                 let text_value = self.consume(
@@ -73,23 +70,21 @@ impl Parser {
                 });
                 self.consume(Token::RParen, "Expected ')' after string literal")?;
                 self.consume(Token::Semicolon, "Expected ';' after 'text'")?;
-                return Ok(node); 
+                return Ok(node);
             }
 
-        
             self.consume(Token::LParen, "Expected '(' after tag name")?;
             node.atributes = self.parse_attributes()?;
             self.consume(Token::RParen, "Expected ')' after tag attributes")?;
 
-      
             if let Some(next_token) = self.peek() {
                 match next_token.token {
                     Token::Semicolon => {
                         self.consume(Token::Semicolon, "Expected ';' after tag attributes")?;
-                        return Ok(node); 
+                        return Ok(node);
                     }
                     Token::LBrace => {
-                        node.children = self.parse_children()?; 
+                        node.children = self.parse_children()?;
                     }
                     _ => {
                         return Err(format!(
@@ -133,29 +128,23 @@ impl Parser {
         while let Some(token) = self.peek() {
             match token.token {
                 Token::Ident => {
-               
                     let name_token = self.consume(Token::Ident, "Expected attribute name")?;
                     let name = name_token.slice;
 
-                    
                     self.consume(Token::Equals, "Expected '=' after attribute name")?;
 
-                  
                     let value_token = self.consume(
                         Token::StringLiteral,
                         "Expected string literal as attribute value",
                     )?;
                     let value = value_token.slice;
 
-                  
                     attributes.push(Attribute { name, value });
                 }
                 Token::Comma => {
-                  
                     self.advance();
                 }
                 Token::RParen => {
-          
                     break;
                 }
                 _ => {

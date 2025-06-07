@@ -1,7 +1,11 @@
 use crate::parser::node::Node;
 
 pub fn generate_html(node: &Node, indent: usize, is_root: bool) -> String {
-    let void_tags = vec!["meta", "img", "br", "hr", "input", "link"];
+    let void_tags = vec![
+        "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source",
+        "track", "wbr",
+    ];
+
     let mut html = String::new();
     let indentation = if is_root {
         "".to_string()
@@ -12,7 +16,7 @@ pub fn generate_html(node: &Node, indent: usize, is_root: bool) -> String {
     if node.name == "text" {
         if let Some(attr) = node.atributes.iter().find(|a| a.name == "value") {
             html.push_str(&indentation);
-            html.push_str(&attr.value.trim_matches('"'));
+            html.push_str(&attr.value);
             html.push('\n');
         }
         return html;

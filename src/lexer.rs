@@ -39,7 +39,6 @@ pub struct SpannedToken {
     pub span: Span,
 }
 
-
 fn line_col(input: &str, pos: usize) -> (usize, usize) {
     let mut line = 1;
     let mut col = 1;
@@ -59,7 +58,6 @@ fn line_col(input: &str, pos: usize) -> (usize, usize) {
     (line, col)
 }
 
-
 pub fn lex_with_positions(input: &str) -> Vec<SpannedToken> {
     let mut lexer = Token::lexer(input);
     let mut result = vec![];
@@ -69,11 +67,18 @@ pub fn lex_with_positions(input: &str) -> Vec<SpannedToken> {
             Ok(token) => {
                 let span = lexer.span();
                 let slice = input[span.clone()].to_string();
+                let decoded_slice = if matches!(token, Token::StringLiteral) {
+                    // Usunięcie pierwszego i ostatniego znaku
+                    let trimmed_slice = slice[1..slice.len() - 1].to_string();
+                    decode_escape_sequences(&trimmed_slice)
+                } else {
+                    slice
+                };
                 let (line, column) = line_col(input, span.start);
 
                 result.push(SpannedToken {
                     token,
-                    slice,
+                    slice: decoded_slice,
                     line,
                     column,
                     span,
@@ -87,7 +92,6 @@ pub fn lex_with_positions(input: &str) -> Vec<SpannedToken> {
         }
     }
 
-
     let (line, column) = line_col(input, input.len());
     let span = lexer.span();
     result.push(SpannedToken {
@@ -99,4 +103,12 @@ pub fn lex_with_positions(input: &str) -> Vec<SpannedToken> {
     });
 
     result
+}
+
+fn decode_escape_sequences(input: &str) -> String {
+    input.replace("\\\"", "\"")
+         .replace("\\\\", "\\")
+         .replace("\\n", "\n")
+         .replace("\\t", "\t")
+         .replace("\\r", "\r")
 }
