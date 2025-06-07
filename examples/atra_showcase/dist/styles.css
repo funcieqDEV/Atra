@@ -1,0 +1,98 @@
+/* Reset i podstawowe ustawienia */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f5f7fa;
+    color: #333;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  /* Nawigacja */
+  .navbar {
+    background: white;
+    border-bottom: 1px solid #e1e4e8;
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #007aff;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.2s;
+  }
+  
+  .nav-links a:hover {
+    color: #007aff;
+  }
+  
+  /* Hero sekcja */
+  .hero {
+    background: linear-gradient(to right, #007aff, #00c6ff);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+    border-radius: 0 0 2rem 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  
+  .hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: white;
+    color: #007aff;
+    font-weight: bold;
+    border-radius: 2rem;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  
+  .btn:hover {
+    background: #f0f0f0;
+  }
+  
+  /* Stopka */
+  .footer {
+    text-align: center;
+    padding: 2rem 0;
+    background: #fff;
+    border-top: 1px solid #e1e4e8;
+    margin-top: 4rem;
+    font-size: 0.9rem;
+    color: #666;
+  }

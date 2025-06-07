@@ -1,0 +1,7 @@
+$footer(){
+    footer(class="footer") {
+        div(class="container") {
+            p() { text("&copy; 2025 OS Dev. All rights reserved."); }
+        }
+    }
+}

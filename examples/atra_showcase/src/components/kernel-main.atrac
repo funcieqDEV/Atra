@@ -1,0 +1,33 @@
+$kernel_main(){
+    main(class="container", style="padding: 4rem 0;"){
+        h2(){
+            text("Kernel Development");
+        }
+        p(style="margin-top: 1rem;") {
+            text("The kernel is the heart of the operating system. It is responsible for managing memory, processes, the file system, and hardware. Building a kernel from scratch is a challenging task, but it is highly educational and rewarding.");
+        }
+        h3(style="margin-top: 2rem;") {
+            text("What to Implement:");
+        }
+        ul(style="margin-top: 1rem; line-height: 1.8;") {
+            li(){
+                text("Basic terminal (output to VGA)");
+            }
+            li(){
+                text("Simple interrupt handling system (IDT)");
+            }
+            li(){
+                text("Memory management (paging, heap, malloc)");
+            }
+            li(){
+                text("Process management (scheduling, context switching)");
+            }
+            li(){
+                text("File system and drivers");
+            }
+        }
+        p(style="margin-top: 2rem;") {
+            text("Kernels are typically written in C or Rust, with assembly used for low-level operations. Tools like QEMU can be used for testing without the need to install on real hardware.");
+        }
+    }
+}

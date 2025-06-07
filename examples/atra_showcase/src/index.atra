@@ -1,0 +1,9 @@
+text("<!DOCTYPE html>");
+html(){
+    $head();
+    body(){
+        $navbar();
+        $index_main();
+        $index_footer();
+    }
+}

@@ -1,0 +1,26 @@
+$index_main(){
+    main(class="container" style="padding: 4rem 0;") {
+        h2() { text("Bootloader"); }
+        p(style="margin-top: 1rem;") {
+            text("The bootloader is the first code executed after the computer starts. Its main task is to load the operating system kernel into memory and transfer control to it.");
+        }
+
+        h3(style="margin-top: 2rem;") { text("Types of Bootloaders"); }
+        ul(style="margin-top: 1rem; line-height: 1.8;") {
+            li() { text("Custom bootloader in assembly (16-bit real mode)"); }
+            li() { text("Multiboot compliant bootloader, e.g., GRUB"); }
+        }
+
+        h3(style="margin-top: 2rem;") { text("Key Concepts"); }
+        ul(style="margin-top: 1rem; line-height: 1.8;") {
+            li() { text("Disk structure and MBR"); }
+            li() { text("Transition from real mode to protected mode"); }
+            li() { text("Loading binary files into memory"); }
+        }
+
+        p(style="margin-top: 2rem;") {
+            text("A popular approach is to use GRUB, which supports the multiboot standard and simplifies loading custom kernels.");
+        }
+    }
+}
+

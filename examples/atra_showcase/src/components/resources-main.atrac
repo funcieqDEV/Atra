@@ -1,0 +1,45 @@
+$resources_main(){
+    main(class="container", style="padding: 4rem 0;"){
+        h2(){
+            text("Useful Resources");
+        }
+        p(style="margin-top: 1rem;") {
+            text("Here is a list of the best materials for learning operating system development:");
+        }
+        ul(style="margin-top: 2rem; line-height: 1.8;") {
+            li(){
+                a(href="https://wiki.osdev.org/Main_Page", target="_blank"){
+                    text("OSDev Wiki");
+                }
+                text(" – The most important source of documentation.");
+            }
+            li(){
+                a(href="https://github.com/cfenollosa/os-tutorial", target="_blank"){
+                    text("os-tutorial");
+                }
+                text(" – A practical tutorial from basics to kernel.");
+            }
+            li(){
+                a(href="https://os.phil-opp.com/", target="_blank"){
+                    text("Writing an OS in Rust");
+                }
+                text(" – A great course on OS development in Rust.");
+            }
+            li(){
+                a(href="https://www.gnu.org/software/grub/manual/", target="_blank"){
+                    text("GRUB Manual");
+                }
+                text(" – Documentation for the GRUB bootloader.");
+            }
+            li(){
+                a(href="https://littleosbook.github.io/", target="_blank"){
+                    text("The Little Book About OS Development");
+                }
+                text(" – A light and accessible book.");
+            }
+        }
+        p(style="margin-top: 2rem;") {
+            text("Remember, OS development requires patience and experimentation. Documentation and community are key!");
+        }
+    }
+}

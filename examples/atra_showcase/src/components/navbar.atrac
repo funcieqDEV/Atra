@@ -1,0 +1,16 @@
+$navbar(){
+    header(class="navbar") {
+        div(class="container") {
+            h1(class="logo") { text("OS Dev"); }
+            nav() {
+                ul(class="nav-links") {
+                    li() { a(href="index.html") { text("Home"); } }
+                    li() { a(href="kernel.html") { text("Kernel"); } }
+                    li() { a(href="bootloader.html") { text("Bootloader"); } }
+                    li() { a(href="resources.html") { text("Resources"); } }
+                }
+            }
+        }
+    }
+}
+

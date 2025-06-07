@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Bootloader | OS Dev
+        </title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header class="navbar">
+            <div class="container">
+                <h1 class="logo">
+                    OS Dev
+                </h1>
+                <nav>
+                    <ul class="nav-links">
+                        <li>
+                            <a href="index.html">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="kernel.html">
+                                Kernel
+                            </a>
+                        </li>
+                        <li>
+                            <a href="bootloader.html">
+                                Bootloader
+                            </a>
+                        </li>
+                        <li>
+                            <a href="resources.html">
+                                Resources
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="container" style="padding: 4rem 0;">
+            <h2>
+                Bootloader Development
+            </h2>
+            <p style="margin-top: 1rem;">
+                The bootloader is the first code executed after the computer starts. Its main task is to load the operating system kernel into memory and transfer control to it.
+            </p>
+            <h3 style="margin-top: 2rem;">
+                Types of Bootloaders:
+            </h3>
+            <ul style="margin-top: 1rem; line-height: 1.8;">
+                <li>
+                    Custom bootloader in assembly (16-bit real mode)
+                </li>
+                <li>
+                    Multiboot compliant bootloader, e.g., GRUB
+                </li>
+            </ul>
+            <h3 style="margin-top: 2rem;">
+                Key Concepts:
+            </h3>
+            <ul style="margin-top: 1rem; line-height: 1.8;">
+                <li>
+                    Disk structure and MBR
+                </li>
+                <li>
+                    Transition from real mode to protected mode
+                </li>
+                <li>
+                    Loading binary files into memory
+                </li>
+            </ul>
+            <p style="margin-top: 2rem;">
+                A popular approach is to use GRUB, which supports the multiboot standard and simplifies loading custom kernels.
+            </p>
+        </main>
+        <footer class="footer">
+            <div class="container">
+                <p>
+                    &copy; 2025 OS Dev. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>

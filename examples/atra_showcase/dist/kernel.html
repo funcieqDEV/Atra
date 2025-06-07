@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Bootloader | OS Dev
+        </title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header class="navbar">
+            <div class="container">
+                <h1 class="logo">
+                    OS Dev
+                </h1>
+                <nav>
+                    <ul class="nav-links">
+                        <li>
+                            <a href="index.html">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="kernel.html">
+                                Kernel
+                            </a>
+                        </li>
+                        <li>
+                            <a href="bootloader.html">
+                                Bootloader
+                            </a>
+                        </li>
+                        <li>
+                            <a href="resources.html">
+                                Resources
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main class="container" style="padding: 4rem 0;">
+            <h2>
+                Kernel Development
+            </h2>
+            <p style="margin-top: 1rem;">
+                The kernel is the heart of the operating system. It is responsible for managing memory, processes, the file system, and hardware. Building a kernel from scratch is a challenging task, but it is highly educational and rewarding.
+            </p>
+            <h3 style="margin-top: 2rem;">
+                What to Implement:
+            </h3>
+            <ul style="margin-top: 1rem; line-height: 1.8;">
+                <li>
+                    Basic terminal (output to VGA)
+                </li>
+                <li>
+                    Simple interrupt handling system (IDT)
+                </li>
+                <li>
+                    Memory management (paging, heap, malloc)
+                </li>
+                <li>
+                    Process management (scheduling, context switching)
+                </li>
+                <li>
+                    File system and drivers
+                </li>
+            </ul>
+            <p style="margin-top: 2rem;">
+                Kernels are typically written in C or Rust, with assembly used for low-level operations. Tools like QEMU can be used for testing without the need to install on real hardware.
+            </p>
+        </main>
+        <footer class="footer">
+            <div class="container">
+                <p>
+                    &copy; 2025 OS Dev. All rights reserved.
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>
