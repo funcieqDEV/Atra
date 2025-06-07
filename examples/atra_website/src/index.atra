@@ -1,0 +1,33 @@
+text("<!DOCTYPE html>");
+html(lang="en"){
+    head(){
+        meta(charset="utf-8");
+        meta(name="viewport", content="width=device-width, initial-scale=1.0");
+        title(){
+            text("Welcome to Atra first ever website!");
+        }
+        link(rel="stylesheet", href="styles.css");
+    }
+    body(){
+        header(id="banner"){
+            h1(){
+                text("Welcome to Atra!");
+            }
+            p(){
+                text("This is the first ever website built with Atra.");
+            }
+            p(){
+                text("Atra is a new templating language that makes it easy to create HTML documents.");
+            }
+            p(){
+                text("This is a simple example of how to use Atra to create a website.");
+            }
+            p(){
+                text("You can learn more about Atra at ");
+                a(href="https://github.com/funcieqDEV/Atra/tree/main/", target="_blank"){
+                    text("GitHub");
+                }
+        }
+    }
+}
+}

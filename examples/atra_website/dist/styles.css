@@ -1,0 +1,80 @@
+/* styles.css */
+
+:root {
+    --primary-color: #4f46e5;
+    --background-color: #f9fafb;
+    --text-color: #1f2937;
+    --muted-color: #6b7280;
+    --header-bg: #ffffff;
+    --border-radius: 12px;
+    --max-width: 800px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+#banner {
+    background-color: var(--header-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    max-width: var(--max-width);
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+#banner:hover {
+    transform: translateY(-4px);
+}
+
+#banner h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+#banner p {
+    margin-bottom: 1rem;
+    color: var(--muted-color);
+    font-size: 1.1rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s ease;
+}
+
+a:hover {
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Responsive tweak */
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
+
+    #banner h1 {
+        font-size: 2rem;
+    }
+
+    #banner {
+        padding: 1.5rem;
+    }
+}
