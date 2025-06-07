@@ -43,12 +43,51 @@ fn main() -> io::Result<()> {
     }
 
     let mut parsed_files = Vec::new();
+    let mut global_components = std::collections::HashMap::new();
+
+ 
+    fn collect_components(
+        folder_path: &Path,
+        components: &mut std::collections::HashMap<String, codegen::codegen::ComponentDefinition>,
+    ) -> io::Result<()> {
+        for entry in fs::read_dir(folder_path)? {
+            let entry = entry?;
+            let path = entry.path();
+
+            if path.is_dir() {
+                collect_components(&path, components)?;
+            } else if path.is_file() && path.extension().map_or(false, |ext| ext == "atrac") {
+                let mut file_content = String::new();
+                File::open(&path)?.read_to_string(&mut file_content)?;
+
+                let mut parser = parser::parser::Parser::new(lex_with_positions(&file_content));
+                match parser.parse() {
+                    Ok(node) => {
+                  
+                        let mut temp_components = std::collections::HashMap::new();
+                        generate_html(&node, 0, true, &mut temp_components);
+                        components.extend(temp_components);
+                    }
+                    Err(err) => {
+                        eprintln!("Error parsing component file '{}': {}", path.display(), err);
+                    }
+                }
+            }
+        }
+        Ok(())
+    }
+
+
+    collect_components(source_path, &mut global_components)?;
 
     fn process_folder(
         folder_path: &Path,
         output_base: &Path,
         parsed_files: &mut Vec<(String, Node)>,
+        global_components: &std::collections::HashMap<String, codegen::codegen::ComponentDefinition>,
     ) -> io::Result<()> {
+        let mut components = global_components.clone(); // Skopiuj globalne komponenty
+
         for entry in fs::read_dir(folder_path)? {
             let entry = entry?;
             let path = entry.path();
@@ -58,7 +97,7 @@ fn main() -> io::Result<()> {
                 let output_subfolder = output_base.join(relative_path);
                 fs::create_dir_all(&output_subfolder)?;
 
-                process_folder(&path, &output_subfolder, parsed_files)?;
+                process_folder(&path, &output_subfolder, parsed_files, global_components)?;
             } else if path.is_file() && path.extension().map_or(false, |ext| ext == "atra") {
                 let mut file_content = String::new();
                 File::open(&path)?.read_to_string(&mut file_content)?;
@@ -72,19 +111,22 @@ fn main() -> io::Result<()> {
                         let output_file_path =
                             output_base.join(relative_path).with_extension("html");
                         let mut output_file = File::create(output_file_path)?;
-                        let html_content = generate_html(&node, 0, true);
+                        let html_content = generate_html(&node, 0, true, &mut components);
                         output_file.write_all(html_content.as_bytes())?;
                     }
                     Err(err) => {
                         eprintln!("Error parsing file '{}': {}", path.display(), err);
                     }
                 }
+            } else if path.is_file() && path.extension().map_or(false, |ext| ext == "atrac") {
+
+                println!("Loaded component file: {}", path.display());
             }
         }
         Ok(())
     }
 
-    process_folder(source_path, output_path, &mut parsed_files)?;
+    process_folder(source_path, output_path, &mut parsed_files, &global_components)?;
 
     Ok(())
 }

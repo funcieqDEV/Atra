@@ -2,11 +2,17 @@ use logos::{Logos, Span};
 
 #[derive(Logos, Debug, PartialEq, Clone, Copy)]
 pub enum Token {
-    #[regex(r"[a-zA-Z_][a-zA-Z0-9_]*")]
+    #[regex(r"%[a-zA-Z_][a-zA-Z0-9_]*")]
+    SpecialFunction,
+    
+    #[regex(r"[a-zA-Z_$][a-zA-Z0-9_$]*")]
     Ident,
 
     #[regex(r#""([^"\\]|\\.)*""#)]
     StringLiteral,
+
+    #[regex(r"[0-9]+")]
+    Number,
 
     #[token("(")]
     LParen,
@@ -68,7 +74,7 @@ pub fn lex_with_positions(input: &str) -> Vec<SpannedToken> {
                 let span = lexer.span();
                 let slice = input[span.clone()].to_string();
                 let decoded_slice = if matches!(token, Token::StringLiteral) {
-                    // Usunięcie pierwszego i ostatniego znaku
+
                     let trimmed_slice = slice[1..slice.len() - 1].to_string();
                     decode_escape_sequences(&trimmed_slice)
                 } else {
@@ -106,9 +112,10 @@ pub fn lex_with_positions(input: &str) -> Vec<SpannedToken> {
 }
 
 fn decode_escape_sequences(input: &str) -> String {
-    input.replace("\\\"", "\"")
-         .replace("\\\\", "\\")
-         .replace("\\n", "\n")
-         .replace("\\t", "\t")
-         .replace("\\r", "\r")
+    input
+        .replace("\\\"", "\"")
+        .replace("\\\\", "\\")
+        .replace("\\n", "\n")
+        .replace("\\t", "\t")
+        .replace("\\r", "\r")
 }

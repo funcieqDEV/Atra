@@ -18,6 +18,8 @@ impl Parser {
             atributes: vec![],
             name: String::new(),
             children: vec![],
+            arguments: vec![],
+            is_special_function: false,
         };
         while !self.is_at_end() {
             if let Some(node) = self.parse_node()? {
@@ -34,6 +36,7 @@ impl Parser {
         match current {
             Some(token) => match token.token {
                 Token::Ident => self.parse_tag().map(Some),
+                Token::SpecialFunction => self.parse_special_function().map(Some),
                 Token::Eof => {
                     self.advance();
                     Ok(None)
@@ -47,11 +50,38 @@ impl Parser {
         }
     }
 
+    fn parse_special_function(&mut self) -> Result<Node, String> {
+        let mut node = Node {
+            atributes: vec![],
+            name: String::new(),
+            children: vec![],
+            arguments: vec![],
+            is_special_function: true,
+        };
+
+        let name_token = self.consume(Token::SpecialFunction, "Expected special function name")?;
+        node.name = name_token.slice.clone();
+
+        self.consume(Token::LParen, "Expected '(' after special function name")?;
+        
+
+        node.arguments = self.parse_component_call_args()?;
+        
+        self.consume(Token::RParen, "Expected ')' after special function arguments")?;
+
+
+        node.children = self.parse_children()?;
+
+        Ok(node)
+    }
+
     fn parse_tag(&mut self) -> Result<Node, String> {
         let mut node = Node {
             atributes: vec![],
             name: String::new(),
             children: vec![],
+            arguments: vec![],
+            is_special_function: false,
         };
 
         if let Some(_token) = self.peek() {
@@ -74,13 +104,31 @@ impl Parser {
             }
 
             self.consume(Token::LParen, "Expected '(' after tag name")?;
-            node.atributes = self.parse_attributes()?;
-            self.consume(Token::RParen, "Expected ')' after tag attributes")?;
+
+     
+            if node.name.starts_with('$') {
+              
+                if let Some(next_token) = self.peek() {
+                    match next_token.token {
+                        Token::Ident => node.arguments = self.parse_component_definition_args()?,
+                        Token::StringLiteral => {
+                            node.arguments = self.parse_component_call_args()?
+                        }
+                        _ => {} 
+                    }
+                } else {
+                    node.arguments = self.parse_component_definition_args()?;
+                }
+            } else {
+                node.atributes = self.parse_attributes()?;
+            }
+
+            self.consume(Token::RParen, "Expected ')' after arguments/attributes")?;
 
             if let Some(next_token) = self.peek() {
                 match next_token.token {
                     Token::Semicolon => {
-                        self.consume(Token::Semicolon, "Expected ';' after tag attributes")?;
+                        self.consume(Token::Semicolon, "Expected ';' after arguments/attributes")?;
                         return Ok(node);
                     }
                     Token::LBrace => {
@@ -88,7 +136,7 @@ impl Parser {
                     }
                     _ => {
                         return Err(format!(
-                            "Unexpected token {:?} after tag attributes at line {}, column {}",
+                            "Unexpected token {:?} after arguments/attributes at line {}, column {}",
                             next_token.token, next_token.line, next_token.column
                         ));
                     }
@@ -107,7 +155,7 @@ impl Parser {
                     self.consume(Token::RBrace, "Expected '}' to close body.")?;
                     break;
                 }
-                Token::Ident => {
+                Token::Ident | Token::SpecialFunction => {
                     if let Some(node) = self.parse_node()? {
                         children.push(node);
                     }
@@ -158,6 +206,76 @@ impl Parser {
 
         Ok(attributes)
     }
+
+    fn parse_component_definition_args(&mut self) -> Result<Vec<String>, String> {
+        let mut args = vec![];
+
+        while let Some(token) = self.peek() {
+            match token.token {
+                Token::Ident => {
+                    let arg = self.consume(Token::Ident, "Expected argument name")?;
+                    args.push(arg.slice);
+                }
+                Token::Comma => {
+                    self.advance();
+                }
+                Token::RParen => {
+                    break;
+                }
+                _ => {
+                    return Err(format!(
+                        "Unexpected token {:?} in component arguments at line {}, column {}",
+                        token.token, token.line, token.column
+                    ));
+                }
+            }
+        }
+
+        Ok(args)
+    }
+
+    fn parse_component_call_args(&mut self) -> Result<Vec<String>, String> {
+        let mut args = vec![];
+
+        while let Some(token) = self.peek() {
+            match token.token {
+                Token::Ident => {
+                    let arg = self.consume(Token::Ident, "Expected argument value")?;
+                    args.push(arg.slice);
+                }
+                Token::StringLiteral => {
+                    let arg = self.consume(Token::StringLiteral, "Expected string argument")?;
+                    args.push(arg.slice);
+                }
+                Token::Number => {
+                    let arg = self.consume(Token::Number, "Expected number argument")?;
+                    args.push(arg.slice);
+                }
+                Token::Comma => {
+                    self.advance();
+                }
+                Token::RParen => {
+                    break;
+                }
+                _ => {
+                    return Err(format!(
+                        "Unexpected token {:?} in component call arguments at line {}, column {}",
+                        token.token, token.line, token.column
+                    ));
+                }
+            }
+        }
+
+        Ok(args)
+    }
+
+    // fn is_component_call(&self) -> bool {
+
+    //     if let Some(token) = self.peek() {
+    //         return token.token == Token::Ident || token.token == Token::StringLiteral;
+    //     }
+    //     false
+    // }
 
     fn advance(&mut self) {
         if !self.is_at_end() {

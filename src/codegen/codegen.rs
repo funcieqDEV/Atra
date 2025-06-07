@@ -1,6 +1,29 @@
-use crate::parser::node::Node;
+use crate::Node;
+use std::collections::HashMap;
+use crate::codegen::special_functions::SpecialFunctionRegistry;
 
-pub fn generate_html(node: &Node, indent: usize, is_root: bool) -> String {
+#[derive(Debug, Clone)]
+pub struct ComponentDefinition {
+    pub params: Vec<String>,
+    pub body: Vec<Node>,
+}
+
+pub fn generate_html(
+    node: &Node,
+    indent: usize,
+    is_root: bool,
+    components: &mut HashMap<String, ComponentDefinition>,
+) -> String {
+    generate_html_with_registry(node, indent, is_root, components, &mut SpecialFunctionRegistry::new())
+}
+
+pub fn generate_html_with_registry(
+    node: &Node,
+    indent: usize,
+    is_root: bool,
+    components: &mut HashMap<String, ComponentDefinition>,
+    registry: &mut SpecialFunctionRegistry,
+) -> String {
     let void_tags = vec![
         "area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source",
         "track", "wbr",
@@ -20,6 +43,27 @@ pub fn generate_html(node: &Node, indent: usize, is_root: bool) -> String {
             html.push('\n');
         }
         return html;
+    }
+
+
+    if node.is_special_function {
+        match registry.execute(node, indent, is_root, components) {
+            Ok(result) => return result,
+            Err(error) => {
+                eprintln!("{}", error);
+                return String::new();
+            }
+        }
+    }
+
+    if node.name.starts_with('$') {
+
+        let component_def = ComponentDefinition {
+            params: node.arguments.clone(),
+            body: node.children.clone(),
+        };
+        components.insert(node.name.clone(), component_def);
+        return html; 
     }
 
     if !node.name.is_empty() {
@@ -42,7 +86,23 @@ pub fn generate_html(node: &Node, indent: usize, is_root: bool) -> String {
 
     for child in &node.children {
         let child_indent = if is_root { indent } else { indent + 1 };
-        html.push_str(&generate_html(child, child_indent, false));
+
+
+        if let Some(component_def) = components.get(&child.name).cloned() {
+            let substituted_body =
+                substitute_arguments(&component_def.body, &component_def.params, &child.arguments);
+            for component_child in substituted_body {
+                html.push_str(&generate_html_with_registry(
+                    &component_child,
+                    child_indent,
+                    false,
+                    components,
+                    registry,
+                ));
+            }
+        } else {
+            html.push_str(&generate_html_with_registry(child, child_indent, false, components, registry));
+        }
     }
 
     if !node.name.is_empty() && !void_tags.contains(&node.name.as_str()) {
@@ -54,4 +114,46 @@ pub fn generate_html(node: &Node, indent: usize, is_root: bool) -> String {
     }
 
     html
+}
+
+fn substitute_arguments(nodes: &[Node], params: &[String], args: &[String]) -> Vec<Node> {
+    let mut substituted = Vec::new();
+
+    for node in nodes {
+        let mut new_node = node.clone();
+
+
+        for attr in &mut new_node.atributes {
+            attr.value = substitute_in_string(&attr.value, params, args);
+        }
+
+
+        for arg in &mut new_node.arguments {
+            *arg = substitute_in_string(arg, params, args);
+        }
+
+
+        new_node.children = substitute_arguments(&node.children, params, args);
+
+        substituted.push(new_node);
+    }
+
+    substituted
+}
+
+
+
+fn substitute_in_string(text: &str, params: &[String], args: &[String]) -> String {
+    let mut result = text.to_string();
+
+    for (i, param) in params.iter().enumerate() {
+        if let Some(arg) = args.get(i) {
+            // Usuń cudzysłowy z argumentu jeśli są
+            let clean_arg = arg.trim_matches('"');
+            // Zastąp tylko placeholder z klamrami
+            result = result.replace(&format!("{{{}}}", param), clean_arg);
+        }
+    }
+
+    result
 }
