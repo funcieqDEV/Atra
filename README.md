@@ -1,13 +1,12 @@
-
 <p align="center">
-<img src="arts/main.png" width="400px">
-  
-![GitHub Release](https://img.shields.io/github/v/release/funcieqDEV/Atra)
-![GitHub Commits](https://img.shields.io/github/commit-activity/m/funcieqDEV/Atra)
-![GitHub Stars](https://img.shields.io/github/stars/funcieqDEV/Atra?style=social)
-![License](https://img.shields.io/github/license/funcieqDEV/Atra)
-![Build Status](https://img.shields.io/github/actions/workflow/status/funcieqDEV/Atra/rust.yml)
+  <img src="arts/main.png" width="400px"><br>
+  <img src="https://img.shields.io/github/v/release/funcieqDEV/Atra">
+  <img src="https://img.shields.io/github/commit-activity/m/funcieqDEV/Atra">
+  <img src="https://img.shields.io/github/stars/funcieqDEV/Atra?style=social">
+  <img src="https://img.shields.io/github/license/funcieqDEV/Atra">
+  <img src="https://img.shields.io/github/actions/workflow/status/funcieqDEV/Atra/rust.yml">
 </p>
+
 
 
 
