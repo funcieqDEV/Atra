@@ -27,7 +27,11 @@ Atra is a modern, efficient static website generator designed for creating fast,
 
 #### From Releases (Recommended)
 1. Download the latest release from [GitHub Releases](https://github.com/funcieqDEV/Atra/releases)
-2. Extract the binary to a directory in your PATH
+
+**windows**
+run the installer and start using Atra
+**linux & mac**
+if there is no install.sh, for the selected release go to compilation
 
 #### Building from Source
 ```bash
@@ -39,9 +43,7 @@ cargo build --release
 ### Adding to System PATH
 
 #### Windows
-1. Copy `atra.exe` to `C:\Program Files\Atra\`
-2. Add `C:\Program Files\Atra\` to your system PATH
-3. Open a new terminal and verify with `atra --help`
+the installer will do it for you
 
 #### Linux/macOS
 ```bash
