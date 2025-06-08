@@ -1,5 +1,8 @@
 
-# Atra
+<p align="center">
+<img src="arts/main.png" width="400px">
+</p>
+
 
 ![GitHub Release](https://img.shields.io/github/v/release/funcieqDEV/Atra)
 ![GitHub Commits](https://img.shields.io/github/commit-activity/m/funcieqDEV/Atra)
