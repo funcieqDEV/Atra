@@ -18,6 +18,7 @@ impl SpecialFunctionRegistry {
         registry.register("%if", handle_if);
         registry.register("%repeat", handle_repeat);
         registry.register("%each", handle_each);
+        registry.register("%readFile", handle_readfile);
         
         registry
     }

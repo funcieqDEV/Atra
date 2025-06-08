@@ -1,3 +1,4 @@
+
 use crate::Node;
 use std::collections::HashMap;
 use crate::codegen::special_functions::SpecialFunctionRegistry;
@@ -39,12 +40,49 @@ pub fn generate_html_with_registry(
     if node.name == "text" {
         if let Some(attr) = node.atributes.iter().find(|a| a.name == "value") {
             html.push_str(&indentation);
-            html.push_str(&attr.value);
+        
+            html.push_str(&attr.value.trim_matches('"'));
             html.push('\n');
         }
         return html;
     }
 
+    if node.name == "style" {
+        html.push_str(&indentation);
+        html.push_str("<style>");
+        html.push('\n');
+        
+        if let Some(attr) = node.atributes.iter().find(|a| a.name == "content") {
+            html.push_str(&indentation);
+            html.push_str("    ");
+            html.push_str(&attr.value);
+            html.push('\n');
+        }
+        
+        html.push_str(&indentation);
+        html.push_str("</style>");
+        html.push('\n');
+        return html;
+    }
+
+
+    if node.name == "script" {
+        html.push_str(&indentation);
+        html.push_str("<script>");
+        html.push('\n');
+        
+        if let Some(attr) = node.atributes.iter().find(|a| a.name == "content") {
+            html.push_str(&indentation);
+            html.push_str("    ");
+            html.push_str(&attr.value);
+            html.push('\n');
+        }
+        
+        html.push_str(&indentation);
+        html.push_str("</script>");
+        html.push('\n');
+        return html;
+    }
 
     if node.is_special_function {
         match registry.execute(node, indent, is_root, components) {
@@ -57,7 +95,6 @@ pub fn generate_html_with_registry(
     }
 
     if node.name.starts_with('$') {
-
         let component_def = ComponentDefinition {
             params: node.arguments.clone(),
             body: node.children.clone(),
@@ -80,13 +117,30 @@ pub fn generate_html_with_registry(
             html.push('"');
         }
 
+   
+        if !node.local_styles.is_empty() {
+            html.push(' ');
+            html.push_str("style");
+            html.push('=');
+            html.push('"');
+            for (i, style) in node.local_styles.iter().enumerate() {
+                if i > 0 {
+                    html.push(' ');
+                }
+                html.push_str(&style.name);
+                html.push(':');
+                html.push_str(&style.value.trim_matches('"'));
+                html.push(';');
+            }
+            html.push('"');
+        }
+
         html.push('>');
         html.push('\n');
     }
 
     for child in &node.children {
         let child_indent = if is_root { indent } else { indent + 1 };
-
 
         if let Some(component_def) = components.get(&child.name).cloned() {
             let substituted_body =
@@ -122,16 +176,18 @@ fn substitute_arguments(nodes: &[Node], params: &[String], args: &[String]) -> V
     for node in nodes {
         let mut new_node = node.clone();
 
-
         for attr in &mut new_node.atributes {
             attr.value = substitute_in_string(&attr.value, params, args);
         }
 
 
+        for style in &mut new_node.local_styles {
+            style.value = substitute_in_string(&style.value, params, args);
+        }
+
         for arg in &mut new_node.arguments {
             *arg = substitute_in_string(arg, params, args);
         }
-
 
         new_node.children = substitute_arguments(&node.children, params, args);
 
@@ -141,16 +197,14 @@ fn substitute_arguments(nodes: &[Node], params: &[String], args: &[String]) -> V
     substituted
 }
 
-
-
 fn substitute_in_string(text: &str, params: &[String], args: &[String]) -> String {
     let mut result = text.to_string();
 
     for (i, param) in params.iter().enumerate() {
         if let Some(arg) = args.get(i) {
-            // Usuń cudzysłowy z argumentu jeśli są
+
             let clean_arg = arg.trim_matches('"');
-            // Zastąp tylko placeholder z klamrami
+
             result = result.replace(&format!("{{{}}}", param), clean_arg);
         }
     }

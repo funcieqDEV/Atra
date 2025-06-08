@@ -2,6 +2,7 @@
 use crate::Node;
 use crate::codegen::codegen::{generate_html, ComponentDefinition};
 use std::collections::HashMap;
+use std::fs;
 
 pub type SpecialFunctionHandler = fn(&Node, usize, bool, &mut HashMap<String, ComponentDefinition>) -> String;
 
@@ -94,25 +95,55 @@ pub fn handle_each(
 ) -> String {
     let mut html = String::new();
     
-    if let Some(items_str) = node.arguments.get(0) {
-
-        let items: Vec<&str> = items_str.trim_matches('"').split(',').map(|s| s.trim()).collect();
+    if node.arguments.is_empty() {
+        eprintln!("Each function requires at least one argument");
+        return html;
+    }
+    
+    // Use all arguments as items
+    for item in &node.arguments {
+        let clean_item = item.trim_matches('"');
         
-        for item in items {
-          
-            for child in &node.children {
-                let mut child_copy = child.clone();
-                substitute_item_in_node(&mut child_copy, item);
-                html.push_str(&generate_html(&child_copy, indent, is_root, components));
-            }
+        for child in &node.children {
+            let mut child_copy = child.clone();
+            substitute_item_in_node(&mut child_copy, clean_item);
+            html.push_str(&generate_html(&child_copy, indent, is_root, components));
         }
-    } else {
-        eprintln!("Each function requires an items argument");
     }
     
     html
 }
 
+
+pub fn handle_readfile(
+    node: &Node,
+    indent: usize,
+    is_root: bool,
+    components: &mut HashMap<String, ComponentDefinition>,
+) -> String {
+    let mut html = String::new();
+    
+    if let Some(filename) = node.arguments.get(0) {
+        let clean_filename = filename.trim_matches('"');
+        
+        match fs::read_to_string(clean_filename) {
+            Ok(content) => {
+                for child in &node.children {
+                    let mut child_copy = child.clone();
+                    substitute_content_in_node(&mut child_copy, &content);
+                    html.push_str(&generate_html(&child_copy, indent, is_root, components));
+                }
+            }
+            Err(err) => {
+                eprintln!("Error reading file '{}': {}", clean_filename, err);
+            }
+        }
+    } else {
+        eprintln!("ReadFile function requires a filename argument");
+    }
+    
+    html
+}
 
 fn substitute_item_in_node(node: &mut Node, item: &str) {
 
@@ -128,5 +159,20 @@ fn substitute_item_in_node(node: &mut Node, item: &str) {
 
     for child in &mut node.children {
         substitute_item_in_node(child, item);
+    }
+}
+
+fn substitute_content_in_node(node: &mut Node, content: &str) {
+    // Replace {content} placeholder with file content
+    for attr in &mut node.atributes {
+        attr.value = attr.value.replace("{content}", content);
+    }
+    
+    for arg in &mut node.arguments {
+        *arg = arg.replace("{content}", content);
+    }
+    
+    for child in &mut node.children {
+        substitute_content_in_node(child, content);
     }
 }
