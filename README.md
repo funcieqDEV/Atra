@@ -5,7 +5,7 @@
 ![GitHub Commits](https://img.shields.io/github/commit-activity/m/funcieqDEV/Atra)
 ![GitHub Stars](https://img.shields.io/github/stars/funcieqDEV/Atra?style=social)
 ![License](https://img.shields.io/github/license/funcieqDEV/Atra)
-![Build Status](https://img.shields.io/github/actions/workflow/status/funcieqDEV/Atra/build.yml)
+![Build Status](https://img.shields.io/github/actions/workflow/status/funcieqDEV/Atra/rust.yml)
 
 Atra is a modern, efficient static website generator designed for creating fast, component-based websites. With its intuitive syntax and powerful component system, Atra makes building static sites both productive and enjoyable.
 
