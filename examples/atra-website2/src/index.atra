@@ -1,0 +1,324 @@
+
+text("<!DOCTYPE html>");
+
+html(lang="en"){
+  head(){
+    meta(charset="UTF-8");
+    meta(name="viewport" content="width=device-width, initial-scale=1.0");
+    title(){
+      text("Atra - Modern Templating Language");
+    }
+    meta(name="description" content="Atra is a modern templating language for web development");
+    link(rel="stylesheet" href="styles.css");
+    @[
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: #fff;
+      }
+      
+      .main-header {
+        background: #fff;
+        border-bottom: 1px solid #e1e1e1;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .nav-brand a {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ce422b;
+        text-decoration: none;
+      }
+      
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+      
+      .nav-links a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+      
+      .nav-links a:hover {
+        color: #ce422b;
+      }
+      
+      .hero {
+        background: linear-gradient(135deg, #ce422b, #f74c00);
+        color: white;
+        padding: 6rem 2rem;
+        text-align: center;
+      }
+      
+      .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+      
+      .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+      
+      .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      .btn {
+        padding: 0.8rem 2rem;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: inline-block;
+      }
+      
+      .btn-primary {
+        background: white;
+        color: #ce422b;
+      }
+      
+      .btn-primary:hover {
+        background: #f0f0f0;
+        transform: translateY(-2px);
+      }
+      
+      .btn-secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+      }
+      
+      .btn-secondary:hover {
+        background: white;
+        color: #ce422b;
+      }
+      
+      .features {
+        padding: 4rem 2rem;
+        background: #f8f8f8;
+      }
+      
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #333;
+      }
+      
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+      
+      .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: transform 0.3s;
+      }
+      
+      .feature-card:hover {
+        transform: translateY(-5px);
+      }
+      
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+      
+      .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #ce422b;
+      }
+      
+      .quick-start {
+        padding: 4rem 2rem;
+      }
+      
+      .code-example {
+        background: #1e1e1e;
+        color: #d4d4d4;
+        padding: 2rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 2rem 0;
+      }
+      
+      .code-example pre {
+        margin: 0;
+      }
+      
+      .main-footer {
+        background: #333;
+        color: white;
+        padding: 3rem 2rem 1rem;
+      }
+      
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+      
+      .footer-section h3 {
+        margin-bottom: 1rem;
+        color: #ce422b;
+      }
+      
+      .footer-section ul {
+        list-style: none;
+      }
+      
+      .footer-section a {
+        color: #ccc;
+        text-decoration: none;
+      }
+      
+      .footer-section a:hover {
+        color: white;
+      }
+      
+      .footer-bottom {
+        border-top: 1px solid #555;
+        padding-top: 1rem;
+        text-align: center;
+        color: #ccc;
+      }
+      
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+        
+        .nav-container {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        
+        .nav-links {
+          gap: 1rem;
+        }
+        
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    ]
+  }
+  body(){
+    $header();
+    
+    main(){
+      section(class="hero"){
+        div(class="hero-content"){
+          h1(){
+            text("Atra");
+          }
+          p(){
+            text("Modern templating language for web development with components and advanced features");
+          }
+          div(class="cta-buttons"){
+            a(href="installation.html" class="btn btn-primary"){
+              text("Get Started");
+            }
+            a(href="https://github.com/funcieqDEV/Atra" class="btn btn-secondary"){
+              text("GitHub");
+            }
+          }
+        }
+      }
+      
+      section(class="features"){
+        div(class="container"){
+          h2(class="section-title"){
+            text("Why Atra?");
+          }
+          div(class="features-grid"){
+            $feature_card("⚡", "Fast", "Compiles to static HTML without additional dependencies");
+            $feature_card("🧩", "Component-based", "Create reusable components with parameters");
+            $feature_card("🎨", "Styling", "Built-in CSS support with style isolation");
+            $feature_card("🔄", "Special functions", "Loop, if, each and other advanced functions");
+            $feature_card("📁", "Organization", "Clean file and folder structure");
+            $feature_card("🛠️", "Simple", "Easy to learn HTML-like syntax");
+          }
+        }
+      }
+      
+      section(class="quick-start"){
+        div(class="container"){
+          h2(class="section-title"){
+            text("Quick Start");
+          }
+          p(style="text-align: center; margin-bottom: 2rem;"){
+            text("Create your first Atra page in a few simple steps:");
+          }
+          
+          div(class="code-example"){
+            pre(){
+              code(){
+                text("// main.atra\nhtml(lang=\"en\"){\n  head(){\n    title(){\n      text(\"My Website\");\n    }\n  }\n  body(){\n    h1(){\n      text(\"Welcome to Atra!\");\n    }\n    p(){\n      text(\"This is my first page.\");\n    }\n  }\n}");
+              }
+            }
+          }
+          
+          div(style="text-align: center; margin-top: 2rem;"){
+            a(href="installation.html" class="btn btn-primary"){
+              text("View Installation Guide");
+            }
+          }
+        }
+      }
+    }
+    
+    $footer();
+  }
+}

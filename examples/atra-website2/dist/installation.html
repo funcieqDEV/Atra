@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Installation - Atra
+        </title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+            .installation-steps{ padding : 4 rem 2 rem ;}.step{ background : white ; padding : 2 rem ; margin : 2 rem 0 ; border-radius : 8 px ; border-left : 4 px solid# ce422b ; box-shadow : 0 2 px 10 px rgba ( 0 , 0 , 0 , 0.1 ) ;}.step h3{ color :# ce422b ; margin-bottom : 1 rem ;}.code-block{ background :# 1 e1e1e ; color :# d4d4d4 ; padding : 1 rem ; border-radius : 6 px ; margin : 1 rem 0 ; overflow-x : auto ;}.code-header{ background :# 2 d2d2d ; color :# ccc ; padding : 0.5 rem 1 rem ; border-radius : 6 px 6 px 0 0 ; font-size : 0.9 rem ; margin-bottom : 0 ;}.code-header+ pre{ margin-top : 0 ; border-radius : 0 0 6 px 6 px ;}.warning{ background :# fff3cd ; border : 1 px solid# ffeaa7 ; color :# 856404 ; padding : 1 rem ; border-radius : 6 px ; margin : 1 rem 0 ;}.info{ background :# d1ecf1 ; border : 1 px solid# bee5eb ; color :# 0 c5460 ; padding : 1 rem ; border-radius : 6 px ; margin : 1 rem 0 ;}
+        </style>
+    </head>
+    <body>
+        <header class="main-header">
+            <nav class="nav-container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        Atra
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="installation.html">
+                            Installation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="docs.html">
+                            Documentation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="examples.html">
+                            Examples
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>
+                        Atra Installation
+                    </h1>
+                    <p>
+                        Learn how to install and get started with Atra
+                    </p>
+                </div>
+            </section>
+            <section class="installation-steps">
+                <div class="container">
+                    <div class="step">
+                        <h3>
+                            Step 1: Download the Latest Version
+                        </h3>
+                        <p>
+                            Go to the 
+                            <a href="https://github.com/funcieqDEV/Atra/releases">
+                                GitHub Releases
+                            </a>
+                             page and download the latest version for your operating system.
+                        </p>
+                        <div class="info">
+                            💡 Atra is available for Windows, macOS and Linux
+                        </div>
+                    </div>
+                    <div class="step">
+                        <h3>
+                            Step 2: Install
+                        </h3>
+                        <p>
+                            Depending on your operating system:
+                        </p>
+                        <h4>
+                            Windows
+                        </h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                PowerShell
+                            </div>
+                            <pre>
+                                <code>
+                                    # Download and extract atra.exe
+# Add to PATH or place in project folder
+                                </code>
+                            </pre>
+                        </div>
+                        <h4>
+                            macOS/Linux
+                        </h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                bash
+                            </div>
+                            <pre>
+                                <code>
+                                    # Download the appropriate binary file
+chmod +x atra
+sudo mv atra /usr/local/bin/
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <h3>
+                            Step 3: Create Your First Project
+                        </h3>
+                        <p>
+                            Create a new folder for your project and create a configuration file:
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                config.json
+                            </div>
+                            <pre>
+                                <code>
+                                    {
+  "source_folder": "src",
+  "output_folder": "dist"
+}
+                                </code>
+                            </pre>
+                        </div>
+                        <p>
+                            Then create a 
+                            <code>
+                                src
+                            </code>
+                             folder and create your first 
+                            <code>
+                                index.atra
+                            </code>
+                             file:
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                src/index.atra
+                            </div>
+                            <pre>
+                                <code>
+                                    text("<!DOCTYPE html>");
+
+html(lang="en"){
+  head(){
+    title(){
+      text("My First Atra Page");
+    }
+    @[
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+      }
+    ]
+  }
+  body(){
+    h1(){
+      text("Welcome to Atra!");
+    }
+    p(){
+      text("This is my first page created with Atra.");
+    }
+  }
+}
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <h3>
+                            Step 4: Build Your Project
+                        </h3>
+                        <p>
+                            Run Atra to compile your project:
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                terminal
+                            </div>
+                            <pre>
+                                <code>
+                                    atra build config.json
+                                </code>
+                            </pre>
+                        </div>
+                        <p>
+                            Or use watch mode for automatic rebuilding:
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                terminal
+                            </div>
+                            <pre>
+                                <code>
+                                    atra watch config.json
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="info">
+                            ✅ Your page will be generated in the 'dist' folder
+                        </div>
+                    </div>
+                    <div class="step">
+                        <h3>
+                            Next Steps
+                        </h3>
+                        <p>
+                            Now that you have a working Atra installation, you can:
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="docs.html">
+                                    Read the documentation
+                                </a>
+                            </li>
+                            <li>
+                                <a href="examples.html">
+                                    See examples
+                                </a>
+                            </li>
+                            <li>
+                                Experiment with components and special functions
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>
+                        Atra
+                    </h3>
+                    <p>
+                        Modern templating language for web development
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>
+                        Links
+                    </h3>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/funcieqDEV/Atra">
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="docs.html">
+                                Documentation
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>
+                    © 2024 Atra. Built with Atra.
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>

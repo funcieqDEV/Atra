@@ -1,0 +1,15 @@
+
+$code_block(lang, code){
+  div(class="code-block"){
+    div(class="code-header"){
+      span(class="code-lang"){
+        text("{lang}");
+      }
+    }
+    pre(){
+      code(class="language-{lang}"){
+        text("{code}");
+      }
+    }
+  }
+}

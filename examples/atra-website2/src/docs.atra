@@ -1,0 +1,237 @@
+
+text("<!DOCTYPE html>");
+
+html(lang="en"){
+  head(){
+    meta(charset="UTF-8");
+    meta(name="viewport" content="width=device-width, initial-scale=1.0");
+    title(){
+      text("Documentation - Atra");
+    }
+    link(rel="stylesheet" href="styles.css");
+    @[
+      .docs-container {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      
+      .docs-sidebar {
+        background: #f8f8f8;
+        padding: 1.5rem;
+        border-radius: 8px;
+        height: fit-content;
+        position: sticky;
+        top: 100px;
+      }
+      
+      .docs-sidebar h3 {
+        margin-bottom: 1rem;
+        color: #ce422b;
+      }
+      
+      .docs-sidebar ul {
+        list-style: none;
+      }
+      
+      .docs-sidebar li {
+        margin-bottom: 0.5rem;
+      }
+      
+      .docs-sidebar a {
+        color: #333;
+        text-decoration: none;
+        padding: 0.25rem 0;
+        display: block;
+      }
+      
+      .docs-sidebar a:hover {
+        color: #ce422b;
+      }
+      
+      .docs-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      
+      .docs-content h2 {
+        color: #ce422b;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #e1e1e1;
+        padding-bottom: 0.5rem;
+      }
+      
+      .docs-content h3 {
+        color: #333;
+        margin: 2rem 0 1rem 0;
+      }
+      
+      @media (max-width: 768px) {
+        .docs-container {
+          grid-template-columns: 1fr;
+        }
+        
+        .docs-sidebar {
+          position: static;
+        }
+      }
+    ]
+  }
+  body(){
+    $header();
+    
+    main(){
+      section(class="hero"){
+        div(class="hero-content"){
+          h1(){
+            text("Atra Documentation");
+          }
+          p(){
+            text("Complete guide to the Atra language");
+          }
+        }
+      }
+      
+      div(class="docs-container"){
+        aside(class="docs-sidebar"){
+          h3(){
+            text("Table of Contents");
+          }
+          ul(){
+            li(){
+              a(href="#basics"){
+                text("Basics");
+              }
+            }
+            li(){
+              a(href="#components"){
+                text("Components");
+              }
+            }
+            li(){
+              a(href="#styling"){
+                text("Styling");
+              }
+            }
+            li(){
+              a(href="#special-functions"){
+                text("Special Functions");
+              }
+            }
+            li(){
+              a(href="#project-structure"){
+                text("Project Structure");
+              }
+            }
+          }
+        }
+        
+        div(class="docs-content"){
+          section(id="basics"){
+            h2(){
+              text("Atra Basics");
+            }
+            p(){
+              text("Atra is a templating language that compiles to static HTML. The syntax is similar to HTML, but with additional features.");
+            }
+            
+            h3(){
+              text("Basic Syntax");
+            }
+            $code_block("atra", "// Basic HTML element\ndiv(){\n  text(\"Content\");\n}\n\n// Element with attributes\ndiv(class=\"container\" id=\"main\"){\n  h1(){\n    text(\"Title\");\n  }\n}");
+            
+            h3(){
+              text("Text");
+            }
+            p(){
+              text("Use the text() function to add text content:");
+            }
+            $code_block("atra", "p(){\n  text(\"This is a paragraph\");\n}");
+          }
+          
+          section(id="components"){
+            h2(){
+              text("Components");
+            }
+            p(){
+              text("Components allow you to create reusable elements with parameters.");
+            }
+            
+            h3(){
+              text("Defining a Component");
+            }
+            $code_block("atra", "// In .atrac file\n$button(text, color){\n  button(class=\"btn btn-{color}\"){\n    text(\"{text}\");\n  }\n}");
+            
+            h3(){
+              text("Using a Component");
+            }
+            $code_block("atra", "// In .atra file\n$button(\"Click me\", \"primary\");\n$button(\"Cancel\", \"secondary\");");
+          }
+          
+          section(id="styling"){
+            h2(){
+              text("Styling");
+            }
+            p(){
+              text("Atra supports inline CSS styles using @[] blocks:");
+            }
+            
+            $code_block("atra", "@[\n  .container {\n    max-width: 1200px;\n    margin: 0 auto;\n    padding: 1rem;\n  }\n  \n  .btn {\n    padding: 0.5rem 1rem;\n    border: none;\n    border-radius: 4px;\n    cursor: pointer;\n  }\n]");
+          }
+          
+          section(id="special-functions"){
+            h2(){
+              text("Special Functions");
+            }
+            p(){
+              text("Atra offers special functions for flow control and data manipulation:");
+            }
+            
+            h3(){
+              text("%if - Conditions");
+            }
+            $code_block("atra", "%if(\"true\"){\n  p(){\n    text(\"This text will be displayed\");\n  }\n}");
+            
+            h3(){
+              text("%each - Iteration");
+            }
+            $code_block("atra", "%each(\"apple\", \"banana\", \"orange\"){\n  li(){\n    text(\"{item}\");\n  }\n}");
+            
+            h3(){
+              text("%repeat - Repetition");
+            }
+            $code_block("atra", "%repeat(\"Hello World!\", \"3\");");
+            
+            h3(){
+              text("%readFile - Reading Files");
+            }
+            $code_block("atra", "%readFile(\"content.txt\"){\n  p(){\n    text(\"{content}\");\n  }\n}");
+          }
+          
+          section(id="project-structure"){
+            h2(){
+              text("Project Structure");
+            }
+            p(){
+              text("Example Atra project structure:");
+            }
+            
+            $code_block("text", "my-project/\n├── config.json\n├── src/\n│   ├── index.atra\n│   ├── about.atra\n│   └── components/\n│       ├── header.atrac\n│       ├── footer.atrac\n│       └── card.atrac\n└── dist/\n    ├── index.html\n    └── about.html");
+            
+            h3(){
+              text("Configuration File");
+            }
+            $code_block("json", "{\n  \"source_folder\": \"src\",\n  \"output_folder\": \"dist\"\n}");
+          }
+        }
+      }
+    }
+    
+    $footer();
+  }
+}

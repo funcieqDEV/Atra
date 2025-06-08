@@ -1,0 +1,34 @@
+
+$header(){
+  header(class="main-header"){
+    nav(class="nav-container"){
+      div(class="nav-brand"){
+        a(href="index.html"){
+          text("Atra");
+        }
+      }
+      ul(class="nav-links"){
+        li(){
+          a(href="index.html"){
+            text("Home");
+          }
+        }
+        li(){
+          a(href="installation.html"){
+            text("Installation");
+          }
+        }
+        li(){
+          a(href="docs.html"){
+            text("Documentation");
+          }
+        }
+        li(){
+          a(href="examples.html"){
+            text("Examples");
+          }
+        }
+      }
+    }
+  }
+}

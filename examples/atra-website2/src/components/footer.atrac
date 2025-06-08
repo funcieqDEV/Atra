@@ -1,0 +1,37 @@
+
+$footer(){
+  footer(class="main-footer"){
+    div(class="footer-content"){
+      div(class="footer-section"){
+        h3(){
+          text("Atra");
+        }
+        p(){
+          text("Modern templating language for web development");
+        }
+      }
+      div(class="footer-section"){
+        h3(){
+          text("Links");
+        }
+        ul(){
+          li(){
+            a(href="https://github.com/funcieqDEV/Atra"){
+              text("GitHub");
+            }
+          }
+          li(){
+            a(href="docs.html"){
+              text("Documentation");
+            }
+          }
+        }
+      }
+    }
+    div(class="footer-bottom"){
+      p(){
+        text("© 2024 Atra. Built with Atra.");
+      }
+    }
+  }
+}

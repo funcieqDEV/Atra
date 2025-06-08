@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Examples - Atra
+        </title>
+        <link rel="stylesheet" href="styles.css">
+        <style>
+            .examples-grid{ display : grid ; grid-template-columns : repeat ( auto-fit , minmax ( 400 px , 1 fr ) ) ; gap : 2 rem ; padding : 2 rem ; max-width : 1200 px ; margin : 0 auto ;}.example-card{ background : white ; border-radius : 8 px ; box-shadow : 0 2 px 10 px rgba ( 0 , 0 , 0 , 0.1 ) ; overflow : hidden ;}.example-header{ background :# ce422b ; color : white ; padding : 1 rem ;}.example-header h3{ margin : 0 ;}.example-content{ padding : 1.5 rem ;}.example-tabs{ display : flex ; margin-bottom : 1 rem ; border-bottom : 1 px solid# e1e1e1 ;}.tab-button{ background : none ; border : none ; padding : 0.5 rem 1 rem ; cursor : pointer ; border-bottom : 2 px solid transparent ;}.tab-button.active{ border-bottom-color :# ce422b ; color :# ce422b ;}
+        </style>
+    </head>
+    <body>
+        <header class="main-header">
+            <nav class="nav-container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        Atra
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="installation.html">
+                            Installation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="docs.html">
+                            Documentation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="examples.html">
+                            Examples
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>
+                        Atra Examples
+                    </h1>
+                    <p>
+                        See practical examples of using the Atra language
+                    </p>
+                </div>
+            </section>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>
+                            Simple Business Card Website
+                        </h3>
+                    </div>
+                    <div class="example-content">
+                        <p>
+                            Basic website with header, sections and footer:
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">
+                                    atra
+                                </span>
+                            </div>
+                            <pre>
+                                <code class="language-atra">
+                                    text("<!DOCTYPE html>");
+
+html(lang="en"){
+  head(){
+    title(){
+      text("John Smith - Portfolio");
+    }
+    @[
+      body { font-family: Arial, sans-serif; }
+      .hero { background: #333; color: white; padding: 2rem; }
+      .section { padding: 2rem; }
+    ]
+  }
+  body(){
+    header(class="hero"){
+      h1(){
+        text("John Smith");
+      }
+      p(){
+        text("Frontend Developer");
+      }
+    }
+    
+    section(class="section"){
+      h2(){
+        text("About Me");
+      }
+      p(){
+        text("I am passionate about programming...");
+      }
+    }
+  }
+}
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>
+                            Product Card Component
+                        </h3>
+                    </div>
+                    <div class="example-content">
+                        <p>
+                            Reusable component for displaying products:
+                        </p>
+                        <h4>
+                            components/product-card.atrac
+                        </h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">
+                                    atra
+                                </span>
+                            </div>
+                            <pre>
+                                <code class="language-atra">
+                                    $product_card(name, price, image, description){
+  div(class="product-card"){
+    img(src="{image}" alt="{name}");
+    div(class="product-info"){
+      h3(){
+        text("{name}");
+      }
+      p(class="price"){
+        text("${price}");
+      }
+      p(class="description"){
+        text("{description}");
+      }
+      button(class="btn-buy"){
+        text("Buy Now");
+      }
+    }
+  }
+}
+                                </code>
+                            </pre>
+                        </div>
+                        <h4>
+                            Usage:
+                        </h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">
+                                    atra
+                                </span>
+                            </div>
+                            <pre>
+                                <code class="language-atra">
+                                    $product_card(
+  "Gaming Laptop",
+  "2999",
+  "laptop.jpg",
+  "High-performance gaming laptop"
+);
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>
+                            List with Iteration
+                        </h3>
+                    </div>
+                    <div class="example-content">
+                        <p>
+                            Dynamic list element generation:
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">
+                                    atra
+                                </span>
+                            </div>
+                            <pre>
+                                <code class="language-atra">
+                                    div(class="team"){
+  h2(){
+    text("Our Team");
+  }
+  div(class="team-grid"){
+    %each("Anna Smith", "Peter Johnson", "Maria Williams"){
+      div(class="team-member"){
+        h3(){
+          text("{item}");
+        }
+        p(){
+          text("Developer");
+        }
+      }
+    }
+  }
+}
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>
+                            Contact Form
+                        </h3>
+                    </div>
+                    <div class="example-content">
+                        <p>
+                            Complete form with style validation:
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">
+                                    atra
+                                </span>
+                            </div>
+                            <pre>
+                                <code class="language-atra">
+                                    form(class="contact-form"){
+  h2(){
+    text("Contact Us");
+  }
+  
+  div(class="form-group"){
+    label(for="name"){
+      text("Name:");
+    }
+    input(type="text" id="name" name="name" required="");
+  }
+  
+  div(class="form-group"){
+    label(for="email"){
+      text("Email:");
+    }
+    input(type="email" id="email" name="email" required="");
+  }
+  
+  div(class="form-group"){
+    label(for="message"){
+      text("Message:");
+    }
+    textarea(id="message" name="message" rows="5" required="");
+  }
+  
+  button(type="submit" class="btn-submit"){
+    text("Send");
+  }
+}
+
+@[
+  .contact-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .btn-submit {
+    background: #ce422b;
+    color: white;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+]
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>
+                            Blog with File Reading
+                        </h3>
+                    </div>
+                    <div class="example-content">
+                        <p>
+                            Dynamic content loading from files:
+                        </p>
+                        <h4>
+                            articles/first-post.md
+                        </h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">
+                                    markdown
+                                </span>
+                            </div>
+                            <pre>
+                                <code class="language-markdown">
+                                    # My First Post
+
+This is the content of my first blog post.
+You can use Markdown or plain text here.
+                                </code>
+                            </pre>
+                        </div>
+                        <h4>
+                            blog.atra
+                        </h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">
+                                    atra
+                                </span>
+                            </div>
+                            <pre>
+                                <code class="language-atra">
+                                    div(class="blog"){
+  h1(){
+    text("My Blog");
+  }
+  
+  %each("first-post", "second-post", "third-post"){
+    article(class="blog-post"){
+      %readFile("articles/{item}.md"){
+        div(class="post-content"){
+          text("{content}");
+        }
+      }
+    }
+  }
+}
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>
+                            Responsive Layout
+                        </h3>
+                    </div>
+                    <div class="example-content">
+                        <p>
+                            Modern responsive layout with CSS Grid:
+                        </p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">
+                                    atra
+                                </span>
+                            </div>
+                            <pre>
+                                <code class="language-atra">
+                                    div(class="layout"){
+  header(class="header"){
+    nav(){
+      text("Navigation");
+    }
+  }
+  
+  aside(class="sidebar"){
+    text("Sidebar");
+  }
+  
+  main(class="main"){
+    text("Main Content");
+  }
+  
+  footer(class="footer"){
+    text("Footer");
+  }
+}
+
+@[
+  .layout {
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "sidebar main"
+      "footer footer";
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+  }
+  
+  .header { grid-area: header; background: #333; color: white; padding: 1rem; }
+  .sidebar { grid-area: sidebar; background: #f5f5f5; padding: 1rem; }
+  .main { grid-area: main; padding: 2rem; }
+  .footer { grid-area: footer; background: #333; color: white; padding: 1rem; }
+  
+  @media (max-width: 768px) {
+    .layout {
+      grid-template-areas:
+        "header"
+        "main"
+        "sidebar"
+        "footer";
+      grid-template-columns: 1fr;
+    }
+  }
+]
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>
+                        Atra
+                    </h3>
+                    <p>
+                        Modern templating language for web development
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>
+                        Links
+                    </h3>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/funcieqDEV/Atra">
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="docs.html">
+                                Documentation
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>
+                    © 2024 Atra. Built with Atra.
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>

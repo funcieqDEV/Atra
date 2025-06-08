@@ -1,0 +1,14 @@
+
+$feature_card(title, description, icon){
+  div(class="feature-card"){
+    div(class="feature-icon"){
+      text("{icon}");
+    }
+    h3(){
+      text("{title}");
+    }
+    p(){
+      text("{description}");
+    }
+  }
+}

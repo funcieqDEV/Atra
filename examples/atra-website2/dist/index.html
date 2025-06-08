@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Atra - Modern Templating Language
+        </title>
+        <meta name="description" content="Atra is a modern templating language for web development">
+        <link rel="stylesheet" href="styles.css">
+        <style>
+            *{ margin : 0 ; padding : 0 ; box-sizing : border-box ;} body{ font-family :' Segoe UI' , Tahoma , Geneva , Verdana , sans-serif ; line-height : 1.6 ; color :# 333 ; background :# fff ;}.main-header{ background :# fff ; border-bottom : 1 px solid# e1e1e1 ; position : sticky ; top : 0 ; z-index : 100 ;}.nav-container{ max-width : 1200 px ; margin : 0 auto ; padding : 1 rem 2 rem ; display : flex ; justify-content : space-between ; align-items : center ;}.nav-brand a{ font-size : 1.5 rem ; font-weight : bold ; color :# ce422b ; text-decoration : none ;}.nav-links{ display : flex ; list-style : none ; gap : 2 rem ;}.nav-links a{ color :# 333 ; text-decoration : none ; font-weight : 500 ; transition : color 0.3 s ;}.nav-links a : hover{ color :# ce422b ;}.hero{ background : linear-gradient ( 135 deg ,# ce422b ,# f74c00 ) ; color : white ; padding : 6 rem 2 rem ; text-align : center ;}.hero-content{ max-width : 800 px ; margin : 0 auto ;}.hero h1{ font-size : 3.5 rem ; margin-bottom : 1 rem ; font-weight : 700 ;}.hero p{ font-size : 1.3 rem ; margin-bottom : 2 rem ; opacity : 0.9 ;}.cta-buttons{ display : flex ; gap : 1 rem ; justify-content : center ; flex-wrap : wrap ;}.btn{ padding : 0.8 rem 2 rem ; border : none ; border-radius : 6 px ; font-size : 1 rem ; font-weight : 600 ; text-decoration : none ; cursor : pointer ; transition : all 0.3 s ; display : inline-block ;}.btn-primary{ background : white ; color :# ce422b ;}.btn-primary : hover{ background :# f0f0f0 ; transform : translateY (- 2 px ) ;}.btn-secondary{ background : transparent ; color : white ; border : 2 px solid white ;}.btn-secondary : hover{ background : white ; color :# ce422b ;}.features{ padding : 4 rem 2 rem ; background :# f8f8f8 ;}.container{ max-width : 1200 px ; margin : 0 auto ;}.section-title{ text-align : center ; font-size : 2.5 rem ; margin-bottom : 3 rem ; color :# 333 ;}.features-grid{ display : grid ; grid-template-columns : repeat ( auto-fit , minmax ( 300 px , 1 fr ) ) ; gap : 2 rem ;}.feature-card{ background : white ; padding : 2 rem ; border-radius : 8 px ; box-shadow : 0 2 px 10 px rgba ( 0 , 0 , 0 , 0.1 ) ; text-align : center ; transition : transform 0.3 s ;}.feature-card : hover{ transform : translateY (- 5 px ) ;}.feature-icon{ font-size : 3 rem ; margin-bottom : 1 rem ;}.feature-card h3{ font-size : 1.5 rem ; margin-bottom : 1 rem ; color :# ce422b ;}.quick-start{ padding : 4 rem 2 rem ;}.code-example{ background :# 1 e1e1e ; color :# d4d4d4 ; padding : 2 rem ; border-radius : 8 px ; overflow-x : auto ; margin : 2 rem 0 ;}.code-example pre{ margin : 0 ;}.main-footer{ background :# 333 ; color : white ; padding : 3 rem 2 rem 1 rem ;}.footer-content{ max-width : 1200 px ; margin : 0 auto ; display : grid ; grid-template-columns : repeat ( auto-fit , minmax ( 250 px , 1 fr ) ) ; gap : 2 rem ; margin-bottom : 2 rem ;}.footer-section h3{ margin-bottom : 1 rem ; color :# ce422b ;}.footer-section ul{ list-style : none ;}.footer-section a{ color :# ccc ; text-decoration : none ;}.footer-section a : hover{ color : white ;}.footer-bottom{ border-top : 1 px solid# 555 ; padding-top : 1 rem ; text-align : center ; color :# ccc ;} @ media ( max-width : 768 px ){.hero h1{ font-size : 2.5 rem ;}.nav-container{ flex-direction : column ; gap : 1 rem ;}.nav-links{ gap : 1 rem ;}.cta-buttons{ flex-direction : column ; align-items : center ;}}
+        </style>
+    </head>
+    <body>
+        <header class="main-header">
+            <nav class="nav-container">
+                <div class="nav-brand">
+                    <a href="index.html">
+                        Atra
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="installation.html">
+                            Installation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="docs.html">
+                            Documentation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="examples.html">
+                            Examples
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>
+                        Atra
+                    </h1>
+                    <p>
+                        Modern templating language for web development with components and advanced features
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="installation.html" class="btn btn-primary">
+                            Get Started
+                        </a>
+                        <a href="https://github.com/funcieqDEV/Atra" class="btn btn-secondary">
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section class="features">
+                <div class="container">
+                    <h2 class="section-title">
+                        Why Atra?
+                    </h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                Compiles to static HTML without additional dependencies
+                            </div>
+                            <h3>
+                                ⚡
+                            </h3>
+                            <p>
+                                Fast
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                Create reusable components with parameters
+                            </div>
+                            <h3>
+                                🧩
+                            </h3>
+                            <p>
+                                Component-based
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                Built-in CSS support with style isolation
+                            </div>
+                            <h3>
+                                🎨
+                            </h3>
+                            <p>
+                                Styling
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                Loop, if, each and other advanced functions
+                            </div>
+                            <h3>
+                                🔄
+                            </h3>
+                            <p>
+                                Special functions
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                Clean file and folder structure
+                            </div>
+                            <h3>
+                                📁
+                            </h3>
+                            <p>
+                                Organization
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                Easy to learn HTML-like syntax
+                            </div>
+                            <h3>
+                                🛠️
+                            </h3>
+                            <p>
+                                Simple
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="quick-start">
+                <div class="container">
+                    <h2 class="section-title">
+                        Quick Start
+                    </h2>
+                    <p style="text-align: center; margin-bottom: 2rem;">
+                        Create your first Atra page in a few simple steps:
+                    </p>
+                    <div class="code-example">
+                        <pre>
+                            <code>
+                                // main.atra
+html(lang="en"){
+  head(){
+    title(){
+      text("My Website");
+    }
+  }
+  body(){
+    h1(){
+      text("Welcome to Atra!");
+    }
+    p(){
+      text("This is my first page.");
+    }
+  }
+}
+                            </code>
+                        </pre>
+                    </div>
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a href="installation.html" class="btn btn-primary">
+                            View Installation Guide
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>
+                        Atra
+                    </h3>
+                    <p>
+                        Modern templating language for web development
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>
+                        Links
+                    </h3>
+                    <ul>
+                        <li>
+                            <a href="https://github.com/funcieqDEV/Atra">
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="docs.html">
+                                Documentation
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>
+                    © 2024 Atra. Built with Atra.
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>
