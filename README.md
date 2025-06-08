@@ -30,6 +30,7 @@ Atra is a modern, efficient static website generator designed for creating fast,
 
 **windows**
 run the installer and start using Atra
+
 **linux & mac**
 if there is no install.sh, for the selected release go to compilation
 
