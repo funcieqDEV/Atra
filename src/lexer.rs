@@ -112,28 +112,37 @@ pub struct SpannedToken {
     pub span: Span,
 }
 
-fn line_col(input: &str, pos: usize) -> (usize, usize) {
-    let mut line = 1;
-    let mut col = 1;
+#[derive(Debug)]
+struct LineMap {
+    offsets: Vec<usize>, // byte offset at the start of each line
+}
 
-    for (i, c) in input.char_indices() {
-        if i == pos {
-            break;
+impl LineMap {
+    fn new(input: &str) -> Self {
+        let mut offsets = vec![0];
+        for (i, b) in input.bytes().enumerate() {
+            if b == b'\n' {
+                offsets.push(i + 1);
+            }
         }
-        if c == '\n' {
-            line += 1;
-            col = 1;
-        } else {
-            col += 1;
-        }
+        Self { offsets }
     }
 
-    (line, col)
+    fn line_col(&self, pos: usize) -> (usize, usize) {
+        match self.offsets.binary_search(&pos) {
+            Ok(line) => (line + 1, 1),
+            Err(line) => {
+                let line_start = self.offsets.get(line.wrapping_sub(1)).copied().unwrap_or(0);
+                (line + 1, pos - line_start + 1)
+            }
+        }
+    }
 }
 
 pub fn lex_with_positions(input: &str) -> Result<Vec<SpannedToken>, LexError> {
     let mut lexer = Token::lexer(input);
     let mut result = vec![];
+    let line_map = LineMap::new(input);
 
     while let Some(res) = lexer.next() {
         match res {
@@ -155,7 +164,7 @@ pub fn lex_with_positions(input: &str) -> Result<Vec<SpannedToken>, LexError> {
                     slice
                 };
                 
-                let (line, column) = line_col(input, span.start);
+                let (line, column) = line_map.line_col(span.start);
 
                 result.push(SpannedToken {
                     token,
@@ -176,7 +185,7 @@ pub fn lex_with_positions(input: &str) -> Result<Vec<SpannedToken>, LexError> {
         }
     }
 
-    let (line, column) = line_col(input, input.len());
+    let (line, column) = line_map.line_col(input.len());
     let span = lexer.span();
     result.push(SpannedToken {
         token: Token::Eof,
