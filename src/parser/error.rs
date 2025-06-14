@@ -2,6 +2,7 @@
 use thiserror::Error;
 use crate::lexer::Token;
 
+#[allow(dead_code)]
 #[derive(Error, Debug, Clone)]
 pub enum ParseError {
     #[error("[E001] Unexpected token")]
@@ -126,6 +127,7 @@ pub enum ParseError {
     },
 }
 
+#[allow(dead_code)]
 impl ParseError {
     pub fn unexpected_token(found: Token, span: (usize, usize), expected: Option<String>) -> Self {
         Self::UnexpectedToken { found, span, expected }

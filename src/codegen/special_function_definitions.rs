@@ -61,7 +61,7 @@ pub fn handle_repeat(
     node: &Node,
     indent: usize,
     is_root: bool,
-    components: &mut HashMap<String, ComponentDefinition>,
+    _components: &mut HashMap<String, ComponentDefinition>,
 ) -> String {
     let mut html = String::new();
     

@@ -1,4 +1,4 @@
 {
-    "source_folder": "src",
-    "output_folder": "dist"
+    "source_folder": "./src",
+    "output_folder": "./dist"
 }
