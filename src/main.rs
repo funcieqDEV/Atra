@@ -3,7 +3,7 @@ mod lexer;
 mod parser;
 use ariadne::{Color, Label, Report, ReportKind, Source};
 use codegen::codegen::generate_html;
-use lexer::{lex_with_positions, LexError};
+use lexer::lex_with_positions;
 use notify::{RecommendedWatcher, RecursiveMode, Watcher};
 use parser::node::Node;
 use serde_json::Value;
@@ -59,18 +59,34 @@ fn main() -> io::Result<()> {
         std::process::exit(1);
     }
 
-    let config_path = &args[2];
+    let config_path = Path::new(&args[2]);
+    let config_dir = config_path.parent().unwrap_or_else(|| Path::new("."));
+
     let config_content = fs::read_to_string(config_path)?;
     let config: Value = serde_json::from_str(&config_content)?;
-    let source_folder = config["source_folder"]
-        .as_str()
-        .expect("Expected 'source_folder' in config.json");
-    let output_folder = config["output_folder"]
-        .as_str()
-        .expect("Expected 'output_folder' in config.json");
 
-    let source_path = Path::new(source_folder);
-    let output_path = Path::new(output_folder);
+    let resolve_path = |folder: &str| {
+        let path = Path::new(folder);
+        if path.is_absolute() {
+            path.to_path_buf()
+        } else {
+            config_dir.join(path)
+        }
+    };
+
+    let source_path = resolve_path(
+        config["source_folder"]
+            .as_str()
+            .expect("Expected 'source_folder' in config.json"),
+    );
+    let source_path = &source_path.as_path();
+
+    let output_path = resolve_path(
+        config["output_folder"]
+            .as_str()
+            .expect("Expected 'output_folder' in config.json"),
+    );
+    let output_path = &output_path.as_path();
 
     if args[1] == "build" {
         build_project(source_path, output_path)?;

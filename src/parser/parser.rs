@@ -260,15 +260,15 @@ impl Parser {
         Ok(node)
     }
     fn parse_children(&mut self) -> Result<Vec<Node>, ParseError> {
-        let brace_token = self.peek().ok_or_else(|| {
-            let pos = if self.tokens.is_empty() { 
-                (0, 0) 
-            } else { 
-                let last = &self.tokens[self.tokens.len() - 1];
-                (last.span.start, last.span.end)
-            };
-            ParseError::unexpected_eof("'{' to start children block", pos)
-        })?;
+        // let brace_token = self.peek().ok_or_else(|| {
+        //     let pos = if self.tokens.is_empty() { 
+        //         (0, 0) 
+        //     } else { 
+        //         let last = &self.tokens[self.tokens.len() - 1];
+        //         (last.span.start, last.span.end)
+        //     };
+        //     ParseError::unexpected_eof("'{' to start children block", pos)
+        // })?;
 
         let open_brace = self.consume(Token::LBrace, "Expected '{' to add body for statement.")?;
         self.push_bracket('{', (open_brace.span.start, open_brace.span.end));
@@ -690,6 +690,7 @@ impl Parser {
         Ok(styles)
     }
 
+    #[allow(dead_code)]
     fn substitute_in_string(text: &str, params: &[String], args: &[String]) -> String {
         let mut result = text.to_string();
 
@@ -730,7 +731,7 @@ impl Parser {
         }
     }
 
-    fn consume(&mut self, expected: Token, err_mess: &str) -> Result<SpannedToken, ParseError> {
+    fn consume(&mut self, expected: Token, _err_mess: &str) -> Result<SpannedToken, ParseError> {
         if self.is_at_end() {
             let pos = if self.tokens.is_empty() { 
                 (0, 0) 
