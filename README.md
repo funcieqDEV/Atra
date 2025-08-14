@@ -1,10 +1,10 @@
 <p align="center">
   <img src="arts/main.png" width="400px"><br>
-  <img src="https://img.shields.io/github/v/release/funcieqDEV/Atra">
-  <img src="https://img.shields.io/github/commit-activity/m/funcieqDEV/Atra">
-  <img src="https://img.shields.io/github/stars/funcieqDEV/Atra?style=social">
-  <img src="https://img.shields.io/github/license/funcieqDEV/Atra">
-  <img src="https://img.shields.io/github/actions/workflow/status/funcieqDEV/Atra/rust.yml">
+  <img src="https://img.shields.io/github/v/release/funcieqDEV/Atra?style=for-the-badge">
+  <img src="https://img.shields.io/github/commit-activity/m/funcieqDEV/Atra?style=for-the-badge">
+  <img src="https://img.shields.io/github/stars/funcieqDEV/Atra?style=for-the-badge">
+  <img src="https://img.shields.io/github/license/funcieqDEV/Atra?style=for-the-badge">
+  <img src="https://img.shields.io/github/actions/workflow/status/funcieqDEV/Atra/rust.yml?style=for-the-badge">
 </p>
 
 
